@@ -1,0 +1,282 @@
+﻿@{
+    ViewData["Title"] = "Avaliação Institucional - Anhembi Morumbi";
+    Layout = "_Layout";
+
+    // Helpers seguros para checar autenticação e roles (evita NullReference)
+    bool IsAuthenticated() => User?.Identity?.IsAuthenticated == true;
+    bool HasRole(string role) => IsAuthenticated() && User.IsInRole(role);
+}
+
+<!--Carregar estilos-->
+<link rel="stylesheet" href="~/css/Home.css" />
+
+<div class="home-container">
+    <!-- Banner Principal -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="hero-title">Bem-vindo ao Portal de Avaliação Institucional</h1>
+                    <p class="hero-subtitle">Sua opinião é fundamental para o desenvolvimento contínuo da nossa instituição</p>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://img.freepik.com/fotos-premium/estudantes-sorrindo-em-uma-tela-de-computador-com-oculos-em-seu-rosto_862335-9580.jpg" alt="Avaliação Institucional" class="img-fluid rounded shadow-lg hero-image" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards de Acesso Rápido -->
+    <section class="quick-actions py-5" id="quick-actions">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Acesso Rápido</h2>
+            <div class="row g-4">
+                @if (HasRole("Administrador"))
+                {
+                    <!-- Cards para Administradores -->
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-gear-fill"></i>
+                                </div>
+                                <h5 class="card-title">Gestão Acadêmica</h5>
+                                <p class="card-text">Gerencie disciplinas, matrículas e professores da instituição.</p>
+                                <a asp-controller="Disciplina" asp-action="Index" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <h5 class="card-title">Gestão de Usuários</h5>
+                                <p class="card-text">Cadastre e gerencie perfis de acesso ao sistema.</p>
+                                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-bar-chart-fill"></i>
+                                </div>
+                                <h5 class="card-title">Relatórios</h5>
+                                <p class="card-text">Visualize relatórios e estatísticas das avaliações.</p>
+                                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (HasRole("Professor"))
+                {
+                    <!-- Cards para Professores -->
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-clipboard-data"></i>
+                                </div>
+                                <h5 class="card-title">Dashboard</h5>
+                                <p class="card-text">Acesse o painel com informações sobre suas disciplinas.</p>
+                                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-journal-text"></i>
+                                </div>
+                                <h5 class="card-title">Disciplinas</h5>
+                                <p class="card-text">Gerencie suas disciplinas e atividades acadêmicas.</p>
+                                <a href="#" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+                                <h5 class="card-title">Feedback</h5>
+                                <p class="card-text">Consulte o feedback recebido nas avaliações institucionais.</p>
+                                <a href="#" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (HasRole("Aluno"))
+                {
+                    <!-- Cards para Alunos -->
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                                <h5 class="card-title">Avaliações Pendentes</h5>
+                                <p class="card-text">Visualize e responda às avaliações disponíveis.</p>
+                                <a asp-controller="Avaliacao" asp-action="Index" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <h5 class="card-title">Histórico</h5>
+                                <p class="card-text">Consulte seu histórico de avaliações realizadas.</p>
+                                <a href="#" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-book"></i>
+                                </div>
+                                <h5 class="card-title">Disciplinas</h5>
+                                <p class="card-text">Visualize informações sobre suas disciplinas atuais.</p>
+                                <a href="#" class="btn btn-outline-primary mt-2">Acessar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (!IsAuthenticated())
+                {
+                    <!-- Cards para Visitantes -->
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-door-open-fill"></i>
+                                </div>
+                                <h5 class="card-title">Acesso ao Sistema</h5>
+                                <p class="card-text">Entre com suas credenciais para acessar o sistema.</p>
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary mt-2">Entrar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                </div>
+                                <h5 class="card-title">Sobre o Sistema</h5>
+                                <p class="card-text">Conheça mais sobre a avaliação institucional.</p>
+                                <a href="#about-section" class="btn btn-outline-primary mt-2">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 action-card">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="bi bi-question-circle-fill"></i>
+                                </div>
+                                <h5 class="card-title">Suporte</h5>
+                                <p class="card-text">Precisa de ajuda? Entre em contato com nossa equipe.</p>
+                                <a href="#contact-section" class="btn btn-outline-primary mt-2">Contato</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Sistema -->
+    <section class="about-section py-5 bg-light" id="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <img src="https://imgs.search.brave.com/MEmAtMqvS0820ZfFqGQDtf_1RGMzil9tGgTASf8TDxQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93b3Jk/cHJlc3MtY21zLXJl/dmlzdGEtcHJvZC1h/c3NldHMucXVlcm8u/c3BhY2UvdXBsb2Fk/cy8yMDI1LzEyL2Nv/bGxlZ2UtZ2lybC13/b3JraW5nLXdpdGgt/bGFwdG9wLWFmdGVy/LWxlc3NvbnMtMS1z/Y2FsZWQuanBn" alt="Sobre a Avaliação Institucional" class="img-fluid rounded shadow about-image" />
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <h2 class="section-title mb-4">Sobre a Avaliação Institucional</h2>
+                    <p class="section-text">O Sistema de Avaliação Institucional da Anhembi Morumbi foi desenvolvido para promover a melhoria contínua da qualidade acadêmica, proporcionando um canal de comunicação entre alunos, professores e gestores.</p>
+                    <p class="section-text">Através deste sistema, coletamos informações valiosas que nos ajudam a identificar pontos fortes e oportunidades de melhoria em nossos processos acadêmicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="how-it-works py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Como Funciona</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="step-card text-center">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="bi bi-person-check-fill"></i>
+                        </div>
+                        <h4 class="step-title">Acesse o Sistema</h4>
+                        <p class="step-description">Faça login com suas credenciais institucionais para acessar as avaliações disponíveis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card text-center">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+                        <h4 class="step-title">Responda as Avaliações</h4>
+                        <p class="step-description">Avalie as disciplinas e professores de acordo com os critérios estabelecidos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card text-center">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                        </div>
+                        <h4 class="step-title">Acompanhe Resultados</h4>
+                        <p class="step-description">Visualize relatórios e estatísticas que contribuem para a melhoria institucional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contact-section py-5 bg-light" id="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="card contact-card">
+                        <div class="card-body">
+                            <h2 class="section-title text-center mb-4">Entre em Contato</h2>
+                            <p class="text-center mb-4">Precisa de ajuda ou tem alguma dúvida sobre o sistema de avaliação?</p>
+                            <div class="contact-info">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-envelope-fill me-3"></i>
+                                    <span>suporte.avaliacao@anhembi.br</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-telephone-fill me-3"></i>
+                                    <span>(15) 3333-4444</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-geo-alt-fill me-3"></i>
+                                    <span>Av. das Universidades, 1000 - Sorocaba/SP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

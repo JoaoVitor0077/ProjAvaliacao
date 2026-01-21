@@ -1,0 +1,181 @@
+﻿/* Estilos específicos para a página Home */
+.home-container {
+    margin-top: -2rem;
+    padding: 30px;
+}
+
+/* Seção Hero */
+.hero-section {
+    color: black;
+    padding: 4rem 0;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.hero-title {
+    color: var(--anhembi-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.hero-image {
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.5s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.hero-image:hover {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+/* Seção de Acesso Rápido */
+.section-title {
+    color: var(--anhembi-secondary);
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.action-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(46, 139, 87, 0.1);
+    margin-bottom: 1rem;
+}
+
+.icon-wrapper i {
+    font-size: 30px;
+    color: var(--anhembi-primary);
+}
+
+/* Seção Sobre */
+.about-image {
+    border-radius: 15px;
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.5s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.about-image:hover {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-number {
+    color: var(--anhembi-primary);
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Como Funciona */
+.step-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 100%;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--anhembi-primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    color: var(--anhembi-secondary);
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-size: 1.2rem;
+    color: var(--anhembi-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* Seção de Contato */
+.contact-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.contact-info i {
+    color: var(--anhembi-primary);
+    font-size: 1.2rem;
+}
+
+/* Responsividade */
+@@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-image {
+        max-width: 80%;
+        margin: 2rem auto 0;
+    }
+
+    .stat-box {
+        margin-bottom: 1.5rem;
+    }
+}
+

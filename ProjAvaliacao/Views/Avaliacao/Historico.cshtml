@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProjAvaliacao.Models.Avaliacao>
+
+@{
+    ViewData["Title"] = "Histórico de Avaliações";
+}
+
+<h2>Histórico de Avaliações</h2>
+
+<hr />
+
+@if (!Model.Any())
+{
+    <p>Você ainda não realizou nenhuma avaliação.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Disciplina</th>
+                <th>Professor</th>
+                <th>Período</th>
+                <th>Nota</th>
+                <th>Recomendaria</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var avaliacao in Model)
+            {
+                <tr>
+                    <td>
+                        @avaliacao.Matricula.DisciplinaOfertada.Disciplina.Nome
+                    </td>
+                    <td>
+                        @avaliacao.Matricula.DisciplinaOfertada.Professor.Nome
+                    </td>
+                    <td>
+                        @avaliacao.Matricula.DisciplinaOfertada.Ano /
+                        @avaliacao.Matricula.DisciplinaOfertada.Semestre
+                    </td>
+                    <td>@avaliacao.Nota</td>
+                    <td>
+                        @(avaliacao.Recomendaria ? "Sim" : "Não")
+                    </td>
+                    <td>
+                        @avaliacao.DataAvaliacao.ToString("dd/MM/yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,92 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Entrar";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* mantenha seu CSS existente aqui (ou mova para wwwroot/css/site.css) */
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .login-container { max-width:450px; margin:0 auto; padding:30px; background:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,.1); margin-top:80px; }
+        .login-header { text-align:center; margin-bottom:30px; }
+        .login-icon { font-size:3rem; color:#0d6efd; margin-bottom:20px; }
+        .form-control { border-radius:8px; padding:12px; }
+        .btn-primary { width:100%; padding:12px; font-weight:600; border-radius:8px; background-color:#16deb3; border:none; }
+        .btn-primary:hover { background-color:#47D598; transform:translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-icon"><i class="fas fa-user-circle"></i></div>
+                <h2>Bem-vindo(a)</h2>
+                <p class="text-muted">Entre com suas credenciais para acessar</p>
+            </div>
+
+            <partial name="_ValidationSummary" />
+
+            <form method="post">
+                <input type="hidden" asp-for="ReturnUrl" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="Input.Identificador" class="form-label">Usuário</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input asp-for="Input.Identificador" class="form-control" placeholder="Digite seu usuário ou e-mail" />
+                    </div>
+                    <span asp-validation-for="Input.Identificador" class="text-danger d-block"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Input.Senha" class="form-label">Senha</label>
+                    <div class="input-group" style="position:relative;">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input asp-for="Input.Senha" type="password" class="form-control" placeholder="Digite sua senha" />
+                        <button type="button" id="togglePwd" class="btn btn-link" style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="Input.Senha" class="text-danger d-block"></span>
+                </div>
+
+                <div class="form-group forgot-password mb-3 text-end">
+                    <a asp-page="./ForgotPassword">Esqueceu sua senha?</a>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="Input.LembrarMe" class="form-check-input" />
+                    <label asp-for="Input.LembrarMe" class="form-check-label">Lembrar de mim</label>
+                </div>
+
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <p>Não tem cadastro? <a asp-page="./Register">Registre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('togglePwd')?.addEventListener('click', function () {
+            var inp = document.querySelector('input[name="Input.Senha"]');
+            if (!inp) return;
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿@model List<ProjAvaliacao.Models.Matricula>
+@{
+    ViewData["Title"] = "Minhas Disciplinas";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/Avaliacao.css" />
+
+<div class="index-container">
+    <div class="page-header">
+        <h2>
+            <i class="bi bi-clipboard-check"></i>
+            Disciplinas Disponíveis para Avaliação
+        </h2>
+        <p>Ajude outros alunos compartilhando sua experiência com as disciplinas cursadas</p>
+        @if (Model.Any())
+        {
+            <span class="stats-badge">
+                <i class="bi bi-list-check"></i>
+                @Model.Count disciplina@(Model.Count > 1 ? "s" : "") pendente@(Model.Count > 1 ? "s" : "")
+            </span>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <h3>Tudo em dia!</h3>
+            <p>Não há disciplinas pendentes de avaliação no momento.</p>
+        </div>
+    }
+    else
+    {
+        <!-- Versão Cards (Recomendada para melhor visual) -->
+        <div class="disciplinas-grid">
+            @foreach (var m in Model)
+            {
+                <div class="disciplina-card">
+                    <div class="disciplina-info">
+                        <h3 class="disciplina-nome">
+                            <i class="bi bi-book-fill"></i>
+                            @m.DisciplinaOfertada.Disciplina.Nome
+                        </h3>
+                        <div class="disciplina-detalhes">
+                            <div class="detalhe-item">
+                                <i class="bi bi-person-circle"></i>
+                                <span><strong>Professor:</strong> @m.DisciplinaOfertada.Professor.Nome</span>
+                            </div>
+                            <div class="detalhe-item">
+                                <i class="bi bi-calendar-event"></i>
+                                <span><strong>Período:</strong> @m.DisciplinaOfertada.Ano/@m.DisciplinaOfertada.Semestre</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-action="Criar"
+                       asp-route-matriculaId="@m.Id"
+                       class="btn-avaliar">
+                        <i class="bi bi-star-fill"></i>
+                        Avaliar Agora
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Versão Tabela (Alternativa - descomente se preferir) -->
+        <!--
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-book"></i> Disciplina</th>
+                        <th><i class="bi bi-person"></i> Professor</th>
+                        <th><i class="bi bi-calendar"></i> Período</th>
+                        <th><i class="bi bi-star"></i> Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                            <tr>
+                                <td>@m.DisciplinaOfertada.Disciplina.Nome</td>
+                                <td>@m.DisciplinaOfertada.Professor.Nome</td>
+                                <td>@m.DisciplinaOfertada.Ano/@m.DisciplinaOfertada.Semestre</td>
+                                <td>
+                                    <a asp-action="Criar"
+                                       asp-route-matriculaId="@m.Id"
+                                       class="btn-avaliar">
+                                        <i class="bi bi-star-fill"></i>
+                                        Avaliar
+                                    </a>
+                                </td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        -->
+    }
+</div>

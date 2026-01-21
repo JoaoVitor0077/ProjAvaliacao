@@ -1,0 +1,401 @@
+﻿/* Página Criar */
+.avaliacao-container {
+    max-width: 800px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-md);
+}
+
+.avaliacao-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.card-header-custom {
+    background: linear-gradient(135deg, var(--anhembi-primary) 0%, var(--anhembi-secondary) 100%);
+    color: white;
+    padding: var(--spacing-xl);
+    border: none;
+}
+
+.card-header-custom h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.card-header-custom p {
+    margin: var(--spacing-sm) 0 0 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.card-body-custom {
+    padding: var(--spacing-xl);
+}
+
+.info-section {
+    background: var(--anhembi-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    border-left: 4px solid var(--anhembi-primary);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--anhembi-text);
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.info-label i {
+    color: var(--anhembi-primary);
+}
+
+.info-value {
+    color: var(--anhembi-grey);
+    flex: 1;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--anhembi-text);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.form-label i {
+    color: var(--anhembi-primary);
+    font-size: 1.1rem;
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--anhembi-light-grey);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--anhembi-primary);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
+}
+
+.form-select {
+    cursor: pointer;
+}
+
+.star-rating {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.star-rating i {
+    font-size: 2rem;
+    color: var(--anhembi-light-grey);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.star-rating i.active,
+.star-rating i:hover {
+    color: var(--anhembi-accent);
+}
+
+.form-check-input:checked {
+    background-color: var(--anhembi-primary);
+    border-color: var(--anhembi-primary);
+}
+
+.form-check-input:focus {
+    border-color: var(--anhembi-primary);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: var(--anhembi-text);
+    cursor: pointer;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--anhembi-primary) 0%, var(--anhembi-secondary) 100%);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: var(--spacing-xs);
+    display: block;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.recommendation-box {
+    background: var(--anhembi-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    border: 2px dashed var(--anhembi-light-grey);
+    transition: all 0.3s ease;
+}
+
+.recommendation-box:has(.form-check-input:checked) {
+    background: rgba(25, 135, 84, 0.05);
+    border-color: var(--anhembi-primary);
+    border-style: solid;
+}
+
+
+/* Página Index */
+.index-container {
+    max-width: 1200px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-md);
+}
+
+.page-header {
+    background: linear-gradient(135deg, var(--anhembi-primary) 0%, var(--anhembi-secondary) 100%);
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    color: white;
+}
+
+.page-header p {
+    margin: var(--spacing-sm) 0 0 0;
+    opacity: 0.95;
+    font-size: 1rem;
+}
+
+.stats-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    display: inline-block;
+    margin-top: var(--spacing-md);
+    font-weight: 600;
+}
+
+.empty-state {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl) * 2;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: var(--anhembi-light-grey);
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty-state h3 {
+    color: var(--anhembi-text);
+    margin-bottom: var(--spacing-md);
+}
+
+.empty-state p {
+    color: var(--anhembi-grey);
+    font-size: 1.1rem;
+}
+
+.disciplinas-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.disciplina-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--anhembi-primary);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.disciplina-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.disciplina-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.disciplina-nome {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--anhembi-text);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.disciplina-nome i {
+    color: var(--anhembi-primary);
+}
+
+.disciplina-detalhes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-sm);
+}
+
+.detalhe-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--anhembi-grey);
+    font-size: 0.95rem;
+}
+
+.detalhe-item i {
+    color: var(--anhembi-primary);
+}
+
+.detalhe-item strong {
+    color: var(--anhembi-text);
+    font-weight: 500;
+}
+
+.btn-avaliar {
+    background: linear-gradient(135deg, var(--anhembi-primary) 0%, var(--anhembi-secondary) 100%);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-avaliar:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-avaliar i {
+    font-size: 1.1rem;
+}
+
+/* Versão tabela para telas maiores (alternativa) */
+.table-responsive {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.custom-table {
+    margin: 0;
+}
+
+.custom-table thead {
+    background: linear-gradient(135deg, var(--anhembi-primary) 0%, var(--anhembi-secondary) 100%);
+    color: white;
+}
+
+.custom-table thead th {
+    border: none;
+    padding: var(--spacing-lg);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.custom-table tbody tr {
+    border-bottom: 1px solid var(--anhembi-light-grey);
+    transition: all 0.2s ease;
+}
+
+.custom-table tbody tr:hover {
+    background: var(--anhembi-light);
+}
+
+.custom-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.custom-table tbody td {
+    padding: var(--spacing-lg);
+    color: var(--anhembi-text);
+    vertical-align: middle;
+}
+
+.custom-table tbody td:first-child {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .disciplina-card {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-avaliar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .page-header h2 {
+        font-size: 1.5rem;
+    }
+}

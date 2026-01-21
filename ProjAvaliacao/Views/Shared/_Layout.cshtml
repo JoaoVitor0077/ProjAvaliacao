@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+@using ProjAvaliacao.Models
+@inject Microsoft.AspNetCore.Identity.UserManager<Usuario> UserManager
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Anhembi Morumbi</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjAvaliacao.styles.css" asp-append-version="true" />
+    
+    <!--Carregando AnhembiStyles-->
+    <link rel="stylesheet" href="~/css/AnhembiStyles.css" />
+    <link rel="stylesheet" href="~/css/_Layout.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <!-- Logo e título -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="https://anhembisorocaba.com.br/wp-content/uploads/2025/05/logo-c.webp"/>
+                </a>
+
+                <!-- Botão de menu para mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu de navegação -->
+                <div class="navbar-collapse collapse d-lg-flex justify-content-end">
+                    <ul class="navbar-nav">
+                        @{
+                            // Segurança: evita NullReference se User for nulo em cenários especiais
+                            var isAuthenticated = User?.Identity?.IsAuthenticated == true;
+                            string nomeUsuario = "";
+                            string usuarioId = null;
+                            if (isAuthenticated)
+                            {
+                                // obtém usuário Identity customizado e usa a propriedade Nome
+                                var usuario = await UserManager.GetUserAsync(User);
+                                nomeUsuario = usuario?.Nome ?? User.Identity?.Name ?? "";
+                                usuarioId = usuario?.Id;
+                            }
+                        }
+
+                        @if (isAuthenticated)
+                        {
+                            <!-- Menu do usuário logado -->
+                            <li class="nav-item dropdown main-menu">
+                                <a class="nav-link dropdown-toggle user-menu" href="#" id="userDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="user-avatar">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <span class="d-none d-md-inline">Minha Conta</span>
+                                    <i class="bi bi-chevron-down ms-1"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <div class="dropdown-item disabled">
+                                            <i class="bi bi-person-circle"></i>
+                                            <span>Olá, @nomeUsuario</span>
+                                        </div>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">
+                                            <i class="bi bi-house-door"></i> Home
+                                        </a>
+                                    </li>
+
+                                    <!-- Verificação de perfil e exibição de menus específicos -->
+                                    @if (User.IsInRole("Professor"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                                <i class="bi bi-speedometer2"></i> Dashboard
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <div class="dropdown-item disabled">
+                                                <i class="bi bi-gear-fill"></i>
+                                                <span>Administração</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Disciplina" asp-action="Index">
+                                                <i class="bi bi-journal-text"></i> Disciplinas
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="DisciplinaOfertada" asp-action="Index">
+                                                <i class="bi bi-calendar-check"></i> Disciplinas Ofertadas
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Matricula" asp-action="Index">
+                                                <i class="bi bi-person-plus"></i> Matrículas
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Professor" asp-action="Index">
+                                                <i class="bi bi-mortarboard"></i> Professores
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">
+                                                <i class="bi bi-person-add"></i> Registrar Usuário
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (User.IsInRole("Aluno"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Avaliacao" asp-action="Index" asp-route-studentId="@usuarioId">
+                                                <i class="bi bi-card-checklist"></i> Avaliações
+                                            </a>
+                                        </li>
+                                    }
+
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                            <i class="bi bi-shield-lock"></i> Privacidade
+                                        </a>
+                                    </li>
+
+                                    <!-- Logout: usa o endpoint padrão do Identity (POST) para logout -->
+                                    <li>
+                                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" class="m-0">
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="bi bi-box-arrow-right"></i> Sair
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <!-- Menu para usuários não logados -->
+                            <li class="nav-item dropdown main-menu">
+                                <a class="nav-link dropdown-toggle" href="#" id="guestDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-list"></i> Menu
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="guestDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">
+                                            <i class="bi bi-house-door"></i> Home
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                            <i class="bi bi-shield-lock"></i> Privacidade
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">
+                                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <i class="bi bi-c-circle"></i> 2025 - ProjAvaliacao | Anhembi Morumbi
+            </div>
+            <div class="footer-links">
+                <a href="#" title="Contato">
+                    <i class="bi bi-envelope"></i>
+                    <span class="d-none d-md-inline">Contato</span>
+                </a>
+                <a href="#" title="Suporte">
+                    <i class="bi bi-question-circle"></i>
+                    <span class="d-none d-md-inline">Suporte</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Script para ajustar o comportamento responsivo -->
+    <script>
+        // Ativar tooltips do Bootstrap
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

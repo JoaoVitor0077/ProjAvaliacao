@@ -1,0 +1,106 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Entrar";
+}
+
+<!--Carregando estilos-->
+<link rel="stylesheet" href="~/css/Login.css" />
+
+<h1 class="sr-only">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="fas fa-user-circle" aria-hidden="true"></i>
+                </div>
+                <h2>Bem-vindo(a)</h2>
+                <p class="text-muted mb-0">Entre com suas credenciais para acessar</p>
+            </div>
+
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <div class="form-group">
+                    <label class="form-label">Usuário</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Digite seu usuário" />
+                    </div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Senha</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" placeholder="Digite sua senha" />
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group forgot-password">
+                    <a asp-page="./ForgotPassword">Esqueceu sua senha?</a>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input asp-for="Input.RememberMe" class="form-check-input" />
+                        <label asp-for="Input.RememberMe" class="form-check-label">Lembrar de mim</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button id="login-submit" type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                    </button>
+                </div>
+
+                <div class="mt-2">
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrar-se como novo usuário</a>
+                    </p>
+                    <p>
+                        <a asp-page="./ResendEmailConfirmation">Reenviar confirmação de e-mail</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordInput = document.querySelector('input[name="Input.Password"]');
+            if (!passwordInput) return;
+
+            const passwordGroup = passwordInput.parentNode;
+            const toggleButton = document.createElement('button');
+            toggleButton.type = 'button';
+            toggleButton.className = 'btn btn-outline-secondary';
+            toggleButton.innerHTML = '<i class="fas fa-eye"></i>';
+            toggleButton.style.position = 'absolute';
+            toggleButton.style.right = '10px';
+            toggleButton.style.top = '50%';
+            toggleButton.style.transform = 'translateY(-50%)';
+            toggleButton.style.zIndex = '10';
+            toggleButton.style.border = 'none';
+            toggleButton.style.background = 'transparent';
+
+            toggleButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+            });
+
+            passwordGroup.style.position = 'relative';
+            passwordGroup.appendChild(toggleButton);
+        });
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿@model ProjAvaliacao.ViewModels.AvaliacaoCreateViewModel
+@{
+    ViewData["Title"] = "Avaliar Disciplina";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/Avaliacao.css" />
+
+<div class="avaliacao-container">
+    <div class="avaliacao-card">
+        <div class="card-header-custom">
+            <h2>📝 Avaliação da Disciplina</h2>
+            <p>Compartilhe sua experiência e ajude outros alunos</p>
+        </div>
+
+        <div class="card-body-custom">
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="info-label">
+                        <i class="bi bi-book"></i>
+                        Disciplina:
+                    </span>
+                    <span class="info-value">@Model.Disciplina</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">
+                        <i class="bi bi-person"></i>
+                        Professor:
+                    </span>
+                    <span class="info-value">@Model.Professor</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">
+                        <i class="bi bi-calendar"></i>
+                        Período:
+                    </span>
+                    <span class="info-value">@Model.Periodo</span>
+                </div>
+            </div>
+
+            <form asp-action="Criar" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="MatriculaId" />
+
+                <div class="mb-4">
+                    <label asp-for="Nota" class="form-label">
+                        <i class="bi bi-star-fill"></i>
+                        Qual sua nota para esta disciplina?
+                    </label>
+                    <select asp-for="Nota" class="form-select">
+                        <option value="">Selecione uma nota de 1 a 5</option>
+                        <option value="1">⭐ 1 - Insatisfatório</option>
+                        <option value="2">⭐⭐ 2 - Abaixo da expectativa</option>
+                        <option value="3">⭐⭐⭐ 3 - Regular</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Bom</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Excelente</option>
+                    </select>
+                    <span asp-validation-for="Nota" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Comentario" class="form-label">
+                        <i class="bi bi-chat-left-text"></i>
+                        Comentário (opcional)
+                    </label>
+                    <textarea asp-for="Comentario" class="form-control" placeholder="Compartilhe sua experiência, pontos positivos, negativos e sugestões..."></textarea>
+                    <span asp-validation-for="Comentario" class="text-danger"></span>
+                </div>
+
+                <div class="recommendation-box mb-4">
+                    <div class="form-check">
+                        <input asp-for="Recomendaria" class="form-check-input" type="checkbox" />
+                        <label asp-for="Recomendaria" class="form-check-label">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            Recomendaria esta disciplina para outros alunos
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-submit">
+                    <i class="bi bi-send"></i> Enviar Avaliação
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
