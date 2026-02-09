@@ -21,7 +21,6 @@ namespace ProjAvaliacao.ViewModels
         [StringLength(1000)]
         public string Comentario { get; set; }
 
-        [Required]
         public bool Recomendaria { get; set; }
     }
 }

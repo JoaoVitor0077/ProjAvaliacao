@@ -14,6 +14,15 @@
         </div>
 
         <div class="card-body-custom">
+            @* DEBUG TEMPORÁRIO: exibe erros de ModelState serializados em TempData *@
+            @if (TempData["ModelErrors"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Erros de validação (ModelState):</strong>
+                    <pre class="mb-0">@TempData["ModelErrors"]</pre>
+                </div>
+            }
+
             <div class="info-section">
                 <div class="info-item">
                     <span class="info-label">
@@ -38,9 +47,14 @@
                 </div>
             </div>
 
-            <form asp-action="Criar" method="post">
+            <form asp-controller="Avaliacao" asp-action="Criar" method="post">
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="MatriculaId" />
+                <input type="hidden" asp-for="Disciplina" />
+                <input type="hidden" asp-for="Professor" />
+                <input type="hidden" asp-for="Periodo" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 <div class="mb-4">
                     <label asp-for="Nota" class="form-label">
