@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Painel Administrativo";
+}
+
+<h2>Painel Administrativo</h2>
+<p class="text-muted">Selecione a ação que deseja executar</p>
+
+<div class="row mt-4">
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Usuários</h5>
+                <p class="card-text">
+                    Criar e gerenciar usuários do sistema.
+                </p>
+                <a asp-action="CriarUsuario"
+                   class="btn btn-primary">
+                    Criar Usuário
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Disciplinas</h5>
+                <p class="card-text">
+                    Cadastrar novas disciplinas acadêmicas.
+                </p>
+                <a asp-controller="Disciplina"
+                   asp-action="Create"
+                   class="btn btn-success">
+                    Criar Disciplina
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -14,15 +14,6 @@
         </div>
 
         <div class="card-body-custom">
-            @* DEBUG TEMPORÁRIO: exibe erros de ModelState serializados em TempData *@
-            @if (TempData["ModelErrors"] != null)
-            {
-                <div class="alert alert-danger" role="alert">
-                    <strong>Erros de validação (ModelState):</strong>
-                    <pre class="mb-0">@TempData["ModelErrors"]</pre>
-                </div>
-            }
-
             <div class="info-section">
                 <div class="info-item">
                     <span class="info-label">

@@ -10,21 +10,30 @@
 <!--Carregar estilos-->
 <link rel="stylesheet" href="~/css/Home.css" />
 
-<div class="home-container">
-    <!-- Banner Principal -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h1 class="hero-title">Bem-vindo ao Portal de Avaliação Institucional</h1>
-                    <p class="hero-subtitle">Sua opinião é fundamental para o desenvolvimento contínuo da nossa instituição</p>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="https://img.freepik.com/fotos-premium/estudantes-sorrindo-em-uma-tela-de-computador-com-oculos-em-seu-rosto_862335-9580.jpg" alt="Avaliação Institucional" class="img-fluid rounded shadow-lg hero-image" />
-                </div>
+<!-- Banner Principal -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="hero-title">Avaliação Institucional</h1>
+                <p class="hero-subtitle">Um espaço oficial para coleta de feedback acadêmico.</p>
+                <ul class="hero-checklist">
+                    <li><i class="bi bi-check2"></i> Avaliação anônima</li>
+                    <li><i class="bi bi-check2"></i> Resultados usados em melhorias reais</li>
+                    <li><i class="bi bi-check2"></i> Processo rápido e objetivo</li>
+                </ul>
+                <a asp-controller="Avaliacao" asp-action="Index" class="btn btn-hero-primary mt-3">
+                    Acessar suas avaliações <i class="bi bi-chevron-right ms-1"></i>
+                </a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://img.freepik.com/fotos-premium/estudantes-sorrindo-em-uma-tela-de-computador-com-oculos-em-seu-rosto_862335-9580.jpg"
+                     alt="Estudantes utilizando tablet para avaliação institucional"
+                     class="img-fluid hero-image" />
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Cards de Acesso Rápido -->
     <section class="quick-actions py-5" id="quick-actions">

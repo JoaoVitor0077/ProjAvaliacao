@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\LoginViewModel.cs" />
+    <Compile Remove="ViewModels\RegisterViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\Home.css" />
     <None Include="wwwroot\css\_Layout.css" />
   </ItemGroup>

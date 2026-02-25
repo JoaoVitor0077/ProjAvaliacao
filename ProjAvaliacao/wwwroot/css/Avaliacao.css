@@ -223,7 +223,7 @@ textarea.form-control {
 .empty-state {
     background: white;
     border-radius: var(--border-radius-lg);
-    padding: var(--spacing-xl) * 2;
+    padding: 30px;
     text-align: center;
     box-shadow: var(--shadow-md);
 }

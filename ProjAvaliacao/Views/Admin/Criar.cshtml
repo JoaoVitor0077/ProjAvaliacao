@@ -1,0 +1,66 @@
+﻿@page
+@model ProjAvaliacao.ViewModels.CreateUsuarioViewModel
+@{
+    ViewData["Title"] = "Criar Novo Usuário";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="CriarUsuario" method="post">
+                @* Validação geral do formulário *@
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                @* Campo: Nome *@
+                <div class="mb-3">
+                    <label asp-for="Nome" class="form-label"></label>
+                    <input asp-for="Nome" class="form-control" placeholder="Digite o nome" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                @* Campo: Sobrenome *@
+                <div class="mb-3">
+                    <label asp-for="Sobrenome" class="form-label"></label>
+                    <input asp-for="Sobrenome" class="form-control" placeholder="Digite o sobrenome" />
+                    <span asp-validation-for="Sobrenome" class="text-danger"></span>
+                </div>
+
+                @* Campo: Email *@
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="exemplo@email.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                @* Campo: Senha *@
+                <div class="mb-3">
+                    <label asp-for="Senha" class="form-label"></label>
+                    <input asp-for="Senha" class="form-control" placeholder="Digite uma senha segura" />
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+
+                @* Campo: Role (Dropdown) *@
+                <div class="mb-3">
+                    <label asp-for="Role" class="form-label"></label>
+                    <select asp-for="Role" class="form-select" asp-items="@(new SelectList(ViewBag.Roles, "Name", "Name"))">
+                        <option value="">-- Selecione o Papel (Role) --</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+                @* Botões de Ação *@
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Criar Usuário</button>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary ms-2">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
