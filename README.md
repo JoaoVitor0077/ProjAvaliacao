@@ -80,7 +80,7 @@ O sistema utiliza ASP.NET Identity, porém com tela de login personalizada.
 
 - Atribuir roles
 
-Separação por tipo de usuário
+- Separação por tipo de usuário
     
 **Administração**
 
@@ -166,6 +166,6 @@ Este projeto foi desenvolvido para:
 
 **👨‍💻 Autor**
 
-Desenvolvido por João Vitor Leite de Castro
+Desenvolvido por **João Vitor Leite de Castro**
 
 **Projeto criado para portfólio e estudos em desenvolvimento .NET.**
